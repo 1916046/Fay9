@@ -2,13 +2,23 @@ import React from "react";
 import LikeDislike from "./LikeDislike";
 import Comment from "./Comment";
 import NavBar from "./NavBar";
+import Admin from "../Admin";
+import Posts from "./Posts";
 
 const Blog = () => {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
   return (
     <div>
       <div><NavBar isLoggedIn={isLoggedIn} /></div>
       <h1>Welcome to the Blog 6.0!</h1>
+      {isAdmin ? (
+        <Admin />
+      ) : (
+        <Posts isLoggedIn={isLoggedIn} />
+
+      )}
       <p>Here are your blog posts:</p>
       <ul>
         <li><h2>Blog post 1</h2></li>
@@ -16,7 +26,7 @@ const Blog = () => {
         <LikeDislike isLoggedIn={isLoggedIn}/>
         <Comment isLoggedIn={isLoggedIn}/>
         <li><h2>Blog post 2</h2></li>
-        <p>Hi, This is blospost 2.Sometimes, a sigle error in you coding can take you whole day, making you life shorter by 1 day, and your productivity, found error which is using useHistory instead of useNavigate</p>
+        <p>Hi, This is blospost 2. Just Chill!!</p>
         <LikeDislike isLoggedIn={isLoggedIn}/>
         <Comment isLoggedIn={isLoggedIn}/>
         <li><h2>Blog post 3</h2></li>

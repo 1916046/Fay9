@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import SignUp from "./SignUp";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,13 +20,27 @@ const Login = () => {
       navigate("/blog");
       alert("Login Successful!");
     } else {
-      alert("Invalid email or password. Please try again. Please Click on Sign-Up");
+      alert("Invalid email or password. Please try again. OR Please Click on Sign-Up");
     }
   };
   
+   const handleAdminLogin = () => {
+    if (email === 'admin' && password === 'admin') {
+      localStorage.setItem('isAdmin', 'true');
+      navigate("/admin");
+      alert("Admin Login Successful!");
+    } else {
+      alert("Invalid email or password. Please try again.");
+    }
+  };
+
+  const MoveToSignUp = () => {
+    navigate("/signup");
+  };
 
   return (
     <div>
+      <h1>Please Login OR Sign Up first</h1>
       <h1>Login</h1>
       <input
         type="email"
@@ -42,8 +55,9 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
-      <SignUp />
-    </div>
+      <button onClick={handleAdminLogin}>Admin Login</button><br/>   
+      <h3>Please Sign Up, if not registered,</h3>
+      <button onClick={MoveToSignUp}>Sign Up</button></div>
   );
 };
 
