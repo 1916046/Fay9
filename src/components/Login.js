@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Button, Input, Form } from "antd";
+import "../index.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,7 +32,7 @@ const Login = () => {
       navigate("/admin");
       alert("Admin Login Successful!");
     } else {
-      alert("Invalid email or password. Please try again.");
+      alert("Admin login or password is wrong.");
     }
   };
 
@@ -39,25 +41,34 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login">
       <h1>Please Login OR Sign Up first</h1>
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleAdminLogin}>Admin Login</button><br/>   
+      <Form>
+        <Form.Item label="Email">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label="Password">
+          <Input.Password
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" onClick={handleLogin}>
+            Login
+          </Button><br></br><br></br>
+          <Button type="primary" onClick={handleAdminLogin}>Admin Login</Button>
+        </Form.Item>
+      </Form>
       <h3>Please Sign Up, if not registered,</h3>
-      <button onClick={MoveToSignUp}>Sign Up</button></div>
+      <Button type="primary" onClick={MoveToSignUp}>Sign Up</Button>
+    </div>
   );
 };
 

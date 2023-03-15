@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Comment = ({ isLoggedIn}) => {
+import { Form, Input, Button } from 'antd';
+import '../index';
+
+const { TextArea } = Input;
+
+const Comment = ({ isLoggedIn }) => {
   const [comments, setComments] = useState([]);
   const navigator = useNavigate();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,12 +24,17 @@ const Comment = ({ isLoggedIn}) => {
   return (
     <div>
       <h3>Leave a comment:</h3>
-      <form onSubmit={handleSubmit}>
-        <textarea name="comment" />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      <div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Item>
+          <TextArea name="comment" />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+      <div className="comments">
         {comments.map((comment, index) => (
           <p key={index}>{comment}</p>
         ))}

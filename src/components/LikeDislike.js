@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'antd';
+import '../index';
 
-const LikeDislike = ({isLoggedIn}) => {
+const LikeDislike = ({ isLoggedIn }) => {
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
@@ -9,7 +11,7 @@ const LikeDislike = ({isLoggedIn}) => {
   const navigator = useNavigate();
 
   const handleLike = () => {
-    if (isLoggedIn){
+    if (isLoggedIn) {
       if (!hasLiked) {
         setLike(like + 1);
         setHasLiked(true);
@@ -21,15 +23,13 @@ const LikeDislike = ({isLoggedIn}) => {
         setLike(like - 1);
         setHasLiked(false);
       }
-    }
-    else {
+    } else {
       navigator('/login');
     }
-    
   };
 
   const handleDislike = () => {
-    if (isLoggedIn){
+    if (isLoggedIn) {
       if (!hasDisliked) {
         setDislike(dislike + 1);
         setHasDisliked(true);
@@ -41,16 +41,19 @@ const LikeDislike = ({isLoggedIn}) => {
         setDislike(dislike - 1);
         setHasDisliked(false);
       }
-    }
-    else {
+    } else {
       navigator('/login');
     }
   };
 
   return (
-    <div>
-      <button onClick={handleLike}>Like ({like})</button>
-      <button onClick={handleDislike}>Dislike ({dislike})</button>
+    <div className="buttons">
+      <Button type="primary" onClick={handleLike}>
+        Like ({like})
+      </Button>
+      <Button type="primary" onClick={handleDislike}>
+        Dislike ({dislike})
+      </Button>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import React from 'react';
+import "../node_modules/antd/dist/antd";
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+
 
 ReactDOM.render(
   <BrowserRouter>
@@ -9,3 +11,4 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
+

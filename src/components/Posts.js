@@ -15,17 +15,14 @@ function Posts({isLoggedIn}) {
 
   return (
     <div>
-      <h2>Posts</h2>
-      <ul>
+      
         {posts.map(post => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
+          <div key={post.id}>
+            <h2>{post.title}</h2>
             <p>{post.content}</p>
             <LikeDislike isLoggedIn={isLoggedIn}/>
-            <Comment isLoggedIn={isLoggedIn}/>
-          </li>
-        ))};
-      </ul>
+            <Comment isLoggedIn={isLoggedIn}/></div>
+        ))}
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Button, Input, Form } from "antd";
+import "../index.css";
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -15,21 +18,30 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <div className="signup">
       <h1>Sign Up</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignUp}>Sign Up</button>
+      <Form>
+        <Form.Item label="Email">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item label="Password">
+          <Input.Password
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" onClick={handleSignUp}>
+            Sign Up
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };

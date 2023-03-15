@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Input, Table } from "antd";
+import "./index";
 
 function Admin() {
   const [posts, setPosts] = useState([]);
@@ -11,15 +13,14 @@ function Admin() {
 
 
   useEffect(() => {
-    // Fetch posts from local storage or API
     const storedPosts = localStorage.getItem('posts');
     if (storedPosts) {
       setPosts(JSON.parse(storedPosts));
     }
   }, []);
 
-  const handleCreate = () => {
-    // Create new post in local storage or API
+  const handleCreate = () => 
+{
     const newPost = {
       id: Date.now(),
       title: newPostTitle,
@@ -41,7 +42,6 @@ function Admin() {
   };
 
   const handleUpdate = () => {
-    // Update post in local storage or API
     const updatedPosts = posts.map(post => {
       if (post.id === updatePostId) {
         return {
@@ -60,7 +60,6 @@ function Admin() {
   };
 
   const handleDelete = (postId) => {
-    // Delete post from local storage or API
     const updatedPosts = posts.filter(post => post.id !== postId);
     setPosts(updatedPosts);
     localStorage.setItem('posts', JSON.stringify(updatedPosts));
@@ -68,61 +67,62 @@ function Admin() {
 
   const handleLogout = () => {
     localStorage.removeItem('isAdmin');
-    window.location.href = '/'; // Redirect to login page
+    window.location.href = '/'; 
   }
 
   return (
-    <div>
+    <div className="admin">
       <h1>Admin</h1>
-      <button onClick={handleLogout}>Log Out</button> {/* Add log out button */}
+      <Button type="primary" onClick={handleLogout}>Log Out</Button> 
       <h2>Create Post</h2>
-      <input
-        type="text"
+      <Input
         placeholder="Title"
         value={newPostTitle}
-        onChange={e => setNewPostTitle(e.target.value)}
+        onChange={(e) => setNewPostTitle(e.target.value)}
       />
-      <textarea
+      <Input.TextArea
         placeholder="Content"
         value={newPostContent}
-        onChange={e => setNewPostContent(e.target.value)}
+        onChange={(e) => setNewPostContent(e.target.value)}
       />
-      <button onClick={handleCreate}>Create</button>
+      <Button type="primary" onClick={handleCreate}>
+        Create
+      </Button>
       {showUpdateFields && (
-  <>
-    <h2>Update Post</h2>
-    <input
-      type="text"
-      placeholder="Post ID"
-      value={updatePostId}
-      onChange={e => setUpdatePostId(e.target.value)}
-    />
-    <input
-      type="text"
-      placeholder="Title"
-      value={updatePostTitle}
-      onChange={e => setUpdatePostTitle(e.target.value)}
-    />
-    <textarea
-      placeholder="Content"
-      value={updatePostContent}
-      onChange={e => setUpdatePostContent(e.target.value)}
-    />
-    <button onClick={handleUpdate}>Update</button>
-  </>
-)}
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <button onClick={() => handleEdit(post.id, post.title, post.content)}>Edit</button>
-      <button onClick={() => handleDelete(post.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      
-
+        <>
+          <h2>Update Post</h2>
+          <Input
+            placeholder="Title"
+            value={updatePostTitle}
+            onChange={(e) => setUpdatePostTitle(e.target.value)}
+          />
+          <Input.TextArea
+            placeholder="Content"
+            value={updatePostContent}
+            onChange={(e) => setUpdatePostContent(e.target.value)}
+          />
+          <Button type="primary" onClick={handleUpdate}>
+            Update
+          </Button>
+        </>
+      )}
+      <h2>Posts</h2>
+      <Table dataSource={posts} rowKey="id">
+        <Table.Column title="Title" dataIndex="title" key="title" />
+        <Table.Column title="Content" dataIndex="content" key="content" />
+        <Table.Column
+          title="Actions"
+          key="actions"
+          render={(text, record) => (
+            <>
+              <Button onClick={() => handleEdit(record.id, record.title, record.content)}>
+                Edit
+              </Button>
+              <Button onClick={() => handleDelete(record.id)}>Delete</Button>
+            </>
+          )}
+        />
+      </Table>
     </div>
   );
 }

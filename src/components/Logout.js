@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import { Button } from "antd";
 
 
 const Logout = () => {
@@ -7,10 +8,10 @@ const Logout = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
-    navigate("/login");
+    navigate("/");
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return <Button type="primary" onClick={handleLogout}>Logout</Button>;
 };
 
 export default Logout;
